@@ -1,18 +1,26 @@
 import react from "react";
-import reactDom from "react-dom";
-import SearchBar from "./SearchBar"
+import axios from "axios";
 
-class App extends react.Component{
+import SearchBar from "./SearchBar";
 
-    onSearchSubmit(term){
-        console.log(term)
-    }
-    render(){
-        return (<div className="ui container" style={{marginTop:'10px'}}>
+class App extends react.Component {
+  onSearchSubmit(term) {
+    axios.get("https://api.unsplash.com/search/photos", {
+      params: {
+        query: term,
+      },
+      headers: {
+        Authorization: "Client-ID 24Tv3q6iIi_xYvdCpq26S7Z4OXij3rslI4iZuqMFey8",
+      },
+    });
+  }
+  render() {
+    return (
+      <div className="ui container" style={{ marginTop: "10px" }}>
         <SearchBar onSubmit={this.onSearchSubmit} />
-    </div>);
-    }
-   
+      </div>
+    );
+  }
 }
 
 export default App;
